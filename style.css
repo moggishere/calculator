@@ -1,0 +1,40 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900);
+
+body {
+    font-family: "Roboto", sans-serif;
+    background-color: #ffddd3;
+}
+
+#header {
+    text-align: center;
+}
+
+#calculatorContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    align-items: center;
+    padding: 3vh;
+    background-color: #b3c9ae;
+    width: 25%;
+    margin: auto;
+}
+
+#display {
+    background-color: aliceblue;
+    width: 23vh;
+}
+
+#buttonContainer {
+    display: grid;
+    grid-template-columns: 5vh 5vh 5vh 5vh;
+    grid-template-rows: 5vh 5vh 5vh 5vh 5vh;
+    gap: 1vh;
+}
+
+#btn-add {
+    grid-column-start: 4;
+    grid-row-start: 4;
+    grid-row-end: 5;
+
+}
