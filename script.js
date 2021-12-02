@@ -106,10 +106,20 @@ function decision() {
             valRight = multiply(a, b);
             break;
         case ':':
-            valRight = divide(a, b);
+            if (b == 0) {
+                clear();
+                alert('lmao no');
+            } else {
+                valRight = divide(a, b);
+            }
             break;
         case '%':
-            valRight = remainder(a, b);
+            if (b == 0) {
+                clear();
+                alert('lmao no');
+            } else {
+                valRight = remainder(a, b);
+            }
             break;
         default:
             zeroDisplay(numberLeft);
