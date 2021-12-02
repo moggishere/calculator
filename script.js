@@ -79,6 +79,40 @@ const updateDisplay = function () {
     numberLeft.innerHTML = valLeft;
 }
 
+function decision() {
+    valTemp = valLeft.split(" ");
+    if (twoInputs !== true) {
+      valLeft += " =";
+      zeroDisplay(numberLeft);
+    }
+    b = parseFloat(valTemp.pop());
+
+    switch (valTemp[1]) {
+        case '+':
+            valRight = add(a, b);
+            break;
+        case '-':
+            valRight = subtract(a, b);
+            break;
+        case 'x':
+            valRight = multiply(a, b);
+            break;
+        case ':':
+            valRight = divide(a, b);
+            break;
+        case '%':
+            valRight = remainder(a, b);
+            break;
+        default:
+            zeroDisplay(numberLeft);
+            zeroDisplay(numberRight);
+            pointVer = false;
+    }
+    
+    updateDisplay();
+    twoInputs = false;
+}
+
 // NUMBER BUTTONS FUNCTIONS
 zeroBtn.addEventListener('click', e => {
     valLeft += '0';
@@ -149,66 +183,59 @@ clearBtn.addEventListener('click', e => {
     zeroDisplay(numberLeft);
     zeroDisplay(numberRight);
     pointVer = false;
+    twoInputs = false;
 })
 
 // OPERATION FUNCTIONS
 addBtn.addEventListener('click', e => {
+    if (twoInputs == true) {
+        decision();
+    }
     a = parseFloat(valLeft);
     valLeft += ' + ';
     updateDisplay();
+    twoInputs = true;
 })
 subtractBtn.addEventListener('click', e => {
+    if (twoInputs == true) {
+        decision();
+    }
     a = parseFloat(valLeft);
     valLeft += ' - ';
     updateDisplay();
+    twoInputs = true;
 })
 multiplyBtn.addEventListener('click', e => {
+    if (twoInputs == true) {
+        decision();
+    }
     a = parseFloat(valLeft);
     valLeft += ' x ';
     updateDisplay();
+    twoInputs = true;
 })
 divideBtn.addEventListener('click', e => {
+    if (twoInputs == true) {
+        decision();
+    }
     a = parseFloat(valLeft);
     valLeft += ' : ';
     updateDisplay();
+    twoInputs = true;
 })
 remainderBtn.addEventListener('click', e => {
+    if (twoInputs == true) {
+        decision();
+    }
     a = parseFloat(valLeft);
     valLeft += ' % ';
     updateDisplay();
+    twoInputs = true;
 })
 
 // EQUALS
 equalBtn.addEventListener('click', e => {
-    valTemp = valLeft.split(" ");
-    valLeft += " ="
-    b = parseFloat(valTemp.pop());
-
-    // valRight = add(a ,b);
-
-    switch (valTemp[1]) {
-        case '+':
-            valRight = add(a, b);
-            break;
-        case '-':
-            valRight = subtract(a, b);
-            break;
-        case 'x':
-            valRight = multiply(a, b);
-            break;
-        case ':':
-            valRight = divide(a, b);
-            break;
-        case '%':
-            valRight = remainder(a, b);
-            break;
-        default:
-            zeroDisplay(numberLeft);
-            zeroDisplay(numberRight);
-            pointVer = false;
-    }
-
-    updateDisplay();
+    decision();
 })
 
 
