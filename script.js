@@ -1,28 +1,28 @@
-const add = function(a, b) {
+const add = function (a, b) {
     return a + b;
 }
 
-const subtract = function(a, b) {
+const subtract = function (a, b) {
     return a - b;
 }
 
-const multiply = function(a, b) {
-    return a*b;
+const multiply = function (a, b) {
+    return a * b;
 }
 
-const divide = function(a, b) {
-    return a/b;
+const divide = function (a, b) {
+    return a / b;
 }
 
-const negative = function(a) {
-    return a*(-1);
+const negative = function (a) {
+    return a * (-1);
 }
 
-const remainder = function(a, b) {
+const remainder = function (a, b) {
     return a % b;
 }
 
-const operate = function(operation , a, b) {
+const operate = function (operation, a, b) {
     return operation(a, b);
 }
 
@@ -30,10 +30,11 @@ const operate = function(operation , a, b) {
 const numberRight = document.getElementById("number-right");
 const numberLeft = document.getElementById("number-left");
 
-// ALL BUTTONS
+// ALL BUTTONS CAPTURE
 const negativeBtn = document.getElementById("btn-negative");
 const clearBtn = document.getElementById("btn-clear");
 const remainderBtn = document.getElementById("btn-remainder");
+const divideBtn = document.getElementById("btn-divide");
 const multiplyBtn = document.getElementById("btn-multiply");
 const subtractBtn = document.getElementById("btn-subtract");
 const addBtn = document.getElementById("btn-add");
@@ -53,25 +54,27 @@ const nineBtn = document.getElementById("btn-nine");
 // STRINGS
 let valLeft = "";
 let valRight = "";
+let valTemp;
 
 // a and b for functions
-let a;
-let b;
+let a = 0;
+let b = 0;
 
 // stop point decimal repeat
 let pointVer = false;
+let twoInputs = false;
 
-const zeroDisplay = function(number) {
+const zeroDisplay = function (number) {
     number.innerHTML = "";
     valRight = "";
     valLeft = "";
 }
 
-const onloadDisplay = function(number) {
+const onloadDisplay = function (number) {
     number.innerHTML = "insert numbers :)";
 }
 
-const updateDisplay = function() {
+const updateDisplay = function () {
     numberRight.innerHTML = valRight;
     numberLeft.innerHTML = valLeft;
 }
@@ -136,6 +139,10 @@ pointBtn.addEventListener('click', e => {
     updateDisplay();
     pointVer = true;
 })
+negativeBtn.addEventListener('click', e => {
+    valLeft = negative(valLeft);
+    updateDisplay();
+})
 
 // CLEAR FUNCTION
 clearBtn.addEventListener('click', e => {
@@ -144,6 +151,65 @@ clearBtn.addEventListener('click', e => {
     pointVer = false;
 })
 
+// OPERATION FUNCTIONS
+addBtn.addEventListener('click', e => {
+    a = parseFloat(valLeft);
+    valLeft += ' + ';
+    updateDisplay();
+})
+subtractBtn.addEventListener('click', e => {
+    a = parseFloat(valLeft);
+    valLeft += ' - ';
+    updateDisplay();
+})
+multiplyBtn.addEventListener('click', e => {
+    a = parseFloat(valLeft);
+    valLeft += ' x ';
+    updateDisplay();
+})
+divideBtn.addEventListener('click', e => {
+    a = parseFloat(valLeft);
+    valLeft += ' : ';
+    updateDisplay();
+})
+remainderBtn.addEventListener('click', e => {
+    a = parseFloat(valLeft);
+    valLeft += ' % ';
+    updateDisplay();
+})
+
+// EQUALS
+equalBtn.addEventListener('click', e => {
+    valTemp = valLeft.split(" ");
+    valLeft += " ="
+    b = parseFloat(valTemp.pop());
+
+    // valRight = add(a ,b);
+
+    switch (valTemp[1]) {
+        case '+':
+            valRight = add(a, b);
+            break;
+        case '-':
+            valRight = subtract(a, b);
+            break;
+        case 'x':
+            valRight = multiply(a, b);
+            break;
+        case ':':
+            valRight = divide(a, b);
+            break;
+        case '%':
+            valRight = remainder(a, b);
+            break;
+        default:
+            zeroDisplay(numberLeft);
+            zeroDisplay(numberRight);
+            pointVer = false;
+    }
+
+    updateDisplay();
+})
 
 
 window.onload = onloadDisplay(numberRight), onloadDisplay(numberLeft);
