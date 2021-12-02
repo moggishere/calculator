@@ -62,7 +62,8 @@ let b = 0;
 
 // stop point decimal repeat
 let pointVer = false;
-let twoInputs = false;
+let twoVer = false; // verifies if there are two inputs inserted
+let fin = false;
 
 const zeroDisplay = function (number) {
     number.innerHTML = "";
@@ -79,11 +80,18 @@ const updateDisplay = function () {
     numberLeft.innerHTML = valLeft;
 }
 
+function clear() {
+    zeroDisplay(numberLeft);
+    zeroDisplay(numberRight);
+    pointVer = false;
+    twoVer = false;
+    fin = false;
+}
+
 function decision() {
     valTemp = valLeft.split(" ");
-    if (twoInputs !== true) {
-      valLeft += " =";
-      zeroDisplay(numberLeft);
+    if (twoVer == true) {
+        valLeft += " =";
     }
     b = parseFloat(valTemp.pop());
 
@@ -108,63 +116,97 @@ function decision() {
             zeroDisplay(numberRight);
             pointVer = false;
     }
-    
+
     updateDisplay();
-    twoInputs = false;
+    twoVer = false;
+    fin = true;
 }
 
 // NUMBER BUTTONS FUNCTIONS
 zeroBtn.addEventListener('click', e => {
+    if (fin == true) {
+        clear();
+    }
     valLeft += '0';
     console.log(valLeft);
     updateDisplay();
 })
 oneBtn.addEventListener('click', e => {
+    if (fin == true) {
+        clear();
+    }
     valLeft += '1';
     console.log(valLeft);
     updateDisplay();
 })
 twoBtn.addEventListener('click', e => {
+    if (fin == true) {
+        clear();
+    }
     valLeft += '2';
     console.log(valLeft);
     updateDisplay();
 })
 threeBtn.addEventListener('click', e => {
+    if (fin == true) {
+        clear();
+    }
     valLeft += '3';
     console.log(valLeft);
     updateDisplay();
 })
 fourBtn.addEventListener('click', e => {
+    if (fin == true) {
+        clear();
+    }
     valLeft += '4';
     console.log(valLeft);
     updateDisplay();
 })
 fiveBtn.addEventListener('click', e => {
+    if (fin == true) {
+        clear();
+    }
     valLeft += '5';
     console.log(valLeft);
     updateDisplay();
 })
 sixBtn.addEventListener('click', e => {
+    if (fin == true) {
+        clear();
+    }
     valLeft += '6';
     console.log(valLeft);
     updateDisplay();
 })
 sevenBtn.addEventListener('click', e => {
+    if (fin == true) {
+        clear();
+    }
     valLeft += '7';
     console.log(valLeft);
     updateDisplay();
 })
 eightBtn.addEventListener('click', e => {
+    if (fin == true) {
+        clear();
+    }
     valLeft += '8';
     console.log(valLeft);
     updateDisplay();
 })
 nineBtn.addEventListener('click', e => {
+    if (fin == true) {
+        clear();
+    }
     valLeft += '9';
     console.log(valLeft);
     updateDisplay();
 })
 pointBtn.addEventListener('click', e => {
+    if (fin == true) {
+        clear();
+    }
     if (pointVer == true) {
         return
     }
@@ -180,57 +222,64 @@ negativeBtn.addEventListener('click', e => {
 
 // CLEAR FUNCTION
 clearBtn.addEventListener('click', e => {
-    zeroDisplay(numberLeft);
-    zeroDisplay(numberRight);
-    pointVer = false;
-    twoInputs = false;
+    clear();
 })
 
 // OPERATION FUNCTIONS
 addBtn.addEventListener('click', e => {
-    if (twoInputs == true) {
+    if (twoVer == true) {
         decision();
+    } else {
+        a = parseFloat(valLeft);
+        valLeft += ' + ';
+        updateDisplay();
+        twoVer = true;
     }
-    a = parseFloat(valLeft);
-    valLeft += ' + ';
-    updateDisplay();
-    twoInputs = true;
+
 })
 subtractBtn.addEventListener('click', e => {
-    if (twoInputs == true) {
+    if (twoVer == true) {
         decision();
+    } else {
+        a = parseFloat(valLeft);
+        valLeft += ' - ';
+        updateDisplay();
+        twoVer = true;
     }
-    a = parseFloat(valLeft);
-    valLeft += ' - ';
-    updateDisplay();
-    twoInputs = true;
+
 })
 multiplyBtn.addEventListener('click', e => {
-    if (twoInputs == true) {
+    if (twoVer == true) {
         decision();
+    } else {
+        a = parseFloat(valLeft);
+        valLeft += ' x ';
+        updateDisplay();
+        twoVer = true;
     }
-    a = parseFloat(valLeft);
-    valLeft += ' x ';
-    updateDisplay();
-    twoInputs = true;
+
 })
 divideBtn.addEventListener('click', e => {
-    if (twoInputs == true) {
+    if (twoVer == true) {
         decision();
+    } else {
+        a = parseFloat(valLeft);
+        valLeft += ' : ';
+        updateDisplay();
+        twoVer = true;
     }
-    a = parseFloat(valLeft);
-    valLeft += ' : ';
-    updateDisplay();
-    twoInputs = true;
+
 })
 remainderBtn.addEventListener('click', e => {
-    if (twoInputs == true) {
+    if (twoVer == true) {
         decision();
+    } else {
+        a = parseFloat(valLeft);
+        valLeft += ' % ';
+        updateDisplay();
+        twoVer = true;
     }
-    a = parseFloat(valLeft);
-    valLeft += ' % ';
-    updateDisplay();
-    twoInputs = true;
+
 })
 
 // EQUALS
